@@ -5,7 +5,8 @@ from functools import partial
 import pymysql
 import credentials as cr
 import tkinter as tk
-
+from tkinter import ttk
+  
 class Management:
     def __init__(self, root):
         self.window = root
@@ -66,26 +67,37 @@ class Management:
         self.frame_3.place(x=0, y=300,relwidth=1, relheight=1)
 
         # All the Buttons in the frame 2
-        self.add_book = Button(self.frame_2, text='Add Book', font=(cs.font_1, 12), bd=2, command=self.AddNewBook,cursor="hand2", bg=cs.color_2,fg=cs.color_3).place(x=50,y=40,width=100)
-        self.issue_book = Button(self.frame_2, text='Issue Book', font=(cs.font_1, 12), bd=2, command=self.GetData_for_IssueBook,cursor="hand2", bg=cs.color_7,fg=cs.color_3).place(x=50,y=100,width=100)
-        self.return_book = Button(self.frame_2, text='Return Book', font=(cs.font_1, 12), bd=2, command=self.ReturnBook,cursor="hand2", bg=cs.color_6,fg=cs.color_3).place(x=50,y=160,width=100)
-        self.all_book = Button(self.frame_2, text='All Books', font=(cs.font_1, 12), bd=2, command=self.ShowBooks,cursor="hand2", bg=cs.color_2,fg=cs.color_3).place(x=50,y=220,width=100)
-        
-        self.search_book = Button(self.frame_2, text='Search Book', font=(cs.font_1, 12), bd=2, command=self.GetBookNametoSearch,cursor="hand2", bg=cs.color_2,fg=cs.color_3).place(x=180,y=40,width=100)
-        self.all_borrow_records = Button(self.frame_2, text='Book Holders', font=(cs.font_1, 12), bd=2, command=self.AllBorrowRecords, cursor="hand2", bg=cs.color_2,fg=cs.color_3).place(x=180,y=100,width=100)
-        self.clear = Button(self.frame_2, text='Clear Screen', font=(cs.font_1, 12), bd=2, command=self.ClearScreen,cursor="hand2", bg=cs.color_2,fg=cs.color_3).place(x=180,y=160,width=100)
-        self.exit = Button(self.frame_2, text='Exit', font=(cs.font_1, 12), bd=2, command=self.Exit,cursor="hand2", bg=cs.color_2,fg=cs.color_3).place(x=180,y=220,width=100)
-        def login(self):
-           username = self.username_entry.get()
-           password = self.password_entry.get()
+     # Create styled buttons
+        style = ttk.Style()
+        style.configure("TButton", font=(cs.font_1, 12), foreground=cs.color_3, background=cs.color_2)
+        button_width = 100
+        button_height = 40
 
-        # Add code here to validate the login credentials from the SQLite database
-        # You can query the 'users' table in the SQLite database and check if the
-        # entered username and password match any record.
+        self.add_book = ttk.Button(self.frame_2, text='Add Book', style="TButton", command=self.AddNewBook)
+        self.add_book.place(x=50, y=40, width=button_width, height=button_height)
 
-        # If login is successful, you can destroy the login frame and display the main application frame.
-        self.login_frame.destroy()
-        self.frame_2.place(x=740, y=0, relwidth=1, relheight=1)
+        self.issue_book = ttk.Button(self.frame_2, text='Issue Book', style="TButton", command=self.GetData_for_IssueBook)
+        self.issue_book.place(x=50, y=100, width=button_width, height=button_height)
+
+        self.return_book = ttk.Button(self.frame_2, text='Return Book', style="TButton", command=self.ReturnBook)
+        self.return_book.place(x=50, y=160, width=button_width, height=button_height)
+
+        self.all_books = ttk.Button(self.frame_2, text='All Books', style="TButton", command=self.ShowBooks)
+        self.all_books.place(x=50, y=220, width=button_width, height=button_height)
+
+        self.search_book = ttk.Button(self.frame_2, text='Search Book', style="TButton", command=self.GetBookNametoSearch)
+        self.search_book.place(x=180, y=40, width=button_width, height=button_height)
+
+        self.book_holders = ttk.Button(self.frame_2, text='Book Holders', style="TButton", command=self.AllBorrowRecords)
+        self.book_holders.place(x=180, y=100, width=button_width, height=button_height)
+
+        self.clear = ttk.Button(self.frame_2, text='Clear Screen', style="TButton", command=self.ClearScreen)
+        self.clear.place(x=180, y=160, width=button_width, height=button_height)
+
+        self.exit = ttk.Button(self.frame_2, text='Exit', style="TButton", command=self.Exit)
+        self.exit.place(x=180, y=220, width=button_width, height=button_height)
+
+       
     # Function 1: It gets call from 'Function 15' when the user clicks on a record
     def OnSelectedforReturn(self, a):
         self.dlt_record = Button(self.frame_3, text='Delete', font=(cs.font_1, 12), bd=2, command=self.ReturningBook,cursor="hand2", bg=cs.color_2,fg=cs.color_3).place(x=50,y=0,width=100)
